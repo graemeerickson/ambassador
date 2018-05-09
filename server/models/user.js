@@ -20,7 +20,18 @@ var userSchema = new mongoose.Schema({
     required: true,
     minlength: 4,
     maxlength: 99
-  }
+  },
+  role: {
+    type: [ String ]
+  },
+  homeAddressNumber: String,
+  homeAddressStreet: {
+    type: String
+  },
+  homeAddressCity: String,
+  homeAddressState: String,
+  homeAddressZip: Number,
+  targetZip: Number
 });
 
 // Override 'toJSON' to prevent the password from being returned with the user
