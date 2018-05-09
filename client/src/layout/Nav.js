@@ -14,8 +14,8 @@ class Nav extends Component {
     if (this.props.user) {
       links = (
         <span>
-          <a onClick={this.handleLogout}>Logout</a>
           <Link to="/profile">Profile</Link>
+          <a onClick={this.handleLogout}>Logout</a>
         </span>
       );
     }
@@ -31,6 +31,7 @@ class Nav extends Component {
     return(
       <div>
         <nav className="nav">
+          <a to="/"><img className="logo" src="ambassador-logo.png" /></a>
           <Link to="/">Home</Link>
           {links}
         </nav>
