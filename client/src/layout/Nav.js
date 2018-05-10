@@ -13,26 +13,24 @@ class Nav extends Component {
     let links = '';
     if (this.props.user) {
       links = (
-        <span>
+        <span className="nav-link">
           <Link to="/profile">Profile</Link>
-          <a onClick={this.handleLogout}>Logout</a>
+          <Link to="/" onClick={this.handleLogout}>Logout</Link>
         </span>
       );
     }
     else {
       links = (
-        <span>
+        <span className="nav-link">
           <Link to="/login">Login</Link>
-          <Link to="/signup">Sign up</Link>
         </span>
       );
     }
     
     return(
       <div>
-        <nav className="nav">
-          <a to="/"><img className="logo" src="ambassador-logo.png" /></a>
-          <Link to="/">Home</Link>
+        <nav className="navbar">
+          <Link to="/"><img className="logo" src="ambassador-logo.png" /></Link>
           {links}
         </nav>
       </div>
