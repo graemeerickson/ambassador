@@ -2,7 +2,13 @@ var mongoose = require('mongoose');
 var bcrypt = require('bcrypt');
 
 var userSchema = new mongoose.Schema({
-  name: {
+  firstName: {
+    type: String,
+    required: true,
+    minlength: 1,
+    maxlength: 99
+  },
+  lastName: {
     type: String,
     required: true,
     minlength: 1,
@@ -24,10 +30,8 @@ var userSchema = new mongoose.Schema({
   role: {
     type: [ String ]
   },
-  homeAddressNumber: String,
-  homeAddressStreet: {
-    type: String
-  },
+  phoneNumber: String,
+  homeAddressStreet: String,
   homeAddressCity: String,
   homeAddressState: String,
   homeAddressZip: Number,
@@ -40,7 +44,15 @@ userSchema.set('toJSON', {
     var returnJson = {
       id: user._id,
       email: user.email,
-      name: user.name
+      firstName: user.firstName,
+      lastName: user.lastName,
+      role: user.role,
+      phoneNumber: user.phoneNumber,
+      homeAddressStreet: user.homeAddressStreet,
+      homeAddressCity: user.homeAddressCity,
+      homeAddressState: user.homeAddressState,
+      homeAddressZip: user.homeAddressZip,
+      targetZip: user.targetZip
     };
     return returnJson;
   }
