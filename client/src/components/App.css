@@ -1,23 +1,40 @@
 /* CUSTOM STYLES */
+input {
+  border-radius: 5px;
+  margin-bottom: 5px;
+}
+label {
+  margin-right: 10px;
+}
 nav {
-  padding: 10px 0;
-  width: 100%;
+  background-color: white;
+  border-bottom: 1px solid black;
+  /*height: 50px;*/
+  /*padding: 10px 0;*/
+  /*text-align: right;*/
 }
 nav a {
-  color: rgb(85,119,187);
+  color: black;
+  cursor: pointer;
   font-size: 20px;
-  margin: 10px;
+  margin: 0 10px;
   text-decoration: none;
 }
 nav a:hover {
+  color: rgb(85,119,187);
+  text-decoration: none;
+}
+.btn {
   background-color: rgb(85,119,187);
-  color: white;
+  border-color: rgb(85,119,187);
 }
 .footer {
-  background-color: lightgray;
+  background-color: white;
+  border-top: 1px solid black;
   bottom: 0;
   height: 25px;
   position: fixed;
+  text-align: center;
   width: 100%;
 }
 .footer-text {
@@ -25,16 +42,27 @@ nav a:hover {
   cursor: default;
   font-size: 11px;
 }
+.logo {
+  height: 55px;
+  /*float: left;*/
+  width: 55px;
+}
+.nav-link {
+  display: block;
+  float: right;
+  /*text-align: right;*/
+}
+.profile-paragraph {
+  margin-left: 10px;
+}
+.role-button {
+  margin: 10px;
+}
 
 /* DEFAULT STYLES */
-.App {
+/*.App {
   text-align: center;
-}
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
-}
+}*/
 
 .App-header {
   background-color: #222;
