@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import axios from 'axios';
 import './App.css';
+import 'mapbox-gl/dist/mapbox-gl.css'
 import Footer from '../layout/Footer';
 import Home from './Home';
 import Login from '../auth/Login';
