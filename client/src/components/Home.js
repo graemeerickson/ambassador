@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import Map from './Map';
+import MapWidget from './MapWidget';
 
 class Home extends Component {
   render() {
@@ -10,7 +10,7 @@ class Home extends Component {
         <div>
           <br/>
           <p>Home screen for user who is already logged in</p>
-          <Map user={this.props.user} />
+          <MapWidget user={this.props.user} />
         </div>
       );
     }
