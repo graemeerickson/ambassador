@@ -5,8 +5,21 @@ class Profile extends Component {
     if (this.props.user) {
       return (
         <div>
-          <h2>Hello again, {this.props.user.name}!</h2>
-          <h4>Your email is {this.props.user.email}</h4>
+          <br/>
+          <h5>Name: {this.props.user.firstName}&nbsp;{this.props.user.lastName}</h5>
+          <h5>Role: {this.props.user.role[0]}</h5>
+          <h5>Home Address</h5>
+          <p className="profile-paragraph">
+            {this.props.user.homeAddressStreet}<br/>
+            {this.props.user.homeAddressCity},&nbsp;
+            {this.props.user.homeAddressState}&nbsp;
+            {this.props.user.homeAddressZip}
+          </p>
+          <h5>Contact Information</h5>
+          <p className="profile-paragraph">
+            Email: {this.props.user.email}<br/>
+            Phone: {this.props.user.phoneNumber}
+          </p>
         </div>
       );
     }
