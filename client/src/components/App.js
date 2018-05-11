@@ -21,12 +21,11 @@ class App extends Component {
   }
 
   componentDidMount = () => {
-    console.log('component did mount');
     this.getUser();
   }
 
   getUser = () => {
-    console.log('get user');
+    // get user
     let token = localStorage.getItem('loginToken');
     if (token) {
       // there is a token in localStorage; validate it
@@ -34,7 +33,6 @@ class App extends Component {
         headers: { 'Authorization': `Bearer ${token}` }
       })
       .then(response => {
-        console.log('success:', response);
         this.setState({
           user: response.data.user
         });
