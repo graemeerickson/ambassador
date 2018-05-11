@@ -4,14 +4,25 @@ import MapWidget from './MapWidget';
 
 class Home extends Component {
   render() {
-    if (this.props.user) { 
-      return(
-        <div>
-          <br/>
-          <p>Home screen for user who is already logged in</p>
-          <MapWidget user={this.props.user} />
-        </div>
-      );
+    if (this.props.user) {
+      if (this.props.user.role[0] === 'Neighborhood Ambassador') {
+        return(
+          <div>
+            <br/>
+            <p>Ambassador dashboard</p>
+            <MapWidget user={this.props.user} />
+          </div>
+        );
+      }
+      else if (this.props.user.role[0] === 'Prospective Homebuyer') {
+        return(
+          <div>
+            <br/>
+            <p>Prospective Homebuyer dashboard</p>
+            <MapWidget user={this.props.user} />
+          </div>
+        );
+      }
     }
     return(
       <div>
