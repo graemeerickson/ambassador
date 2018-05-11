@@ -49,7 +49,6 @@ router.post('/signup', function(req, res) {
           var token = jwt.sign(createdUser.toJSON(), process.env.JWT_SECRET, {
             expiresIn: 60 * 60 * 24 // 24 hours, in seconds
           });
-
           res.send({ user: createdUser, token: token });
         })
         .catch(function(err){
