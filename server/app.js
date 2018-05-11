@@ -36,6 +36,8 @@ app.use('/auth', expressJWT({
   ]
 }), require('./routes/auth'));
 
+app.use('/user', require('./routes/user'));
+
 // app.get('*', function(req, res, next) {
 // 	res.sendFile(path.resolve(__dirname, 'client', 'public', 'index.html'));
 // });
