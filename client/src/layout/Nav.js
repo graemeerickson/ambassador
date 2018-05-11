@@ -30,7 +30,7 @@ class Nav extends Component {
     return(
       <div>
         <nav className="navbar">
-          <Link to="/"><img className="logo" src="ambassador-logo.png" /></Link>
+          <Link to="/"><img className="logo" src="ambassador-logo.png" alt="Ambassador logo" /></Link>
           {links}
         </nav>
       </div>
