@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
-import ReactMapboxGL, { Layer, Feature, Popup, Cluster }  from 'react-mapbox-gl';
+import ReactMapboxGL, { Marker, Layer, Feature, Popup, Cluster }  from 'react-mapbox-gl';
 import mapMarkerIcon from '../marker-icon.svg';
 const MAPBOX_API_KEY = process.env.REACT_APP_MAPBOXAPI_KEY;
 
 const Map = ReactMapboxGL({ accessToken: `${MAPBOX_API_KEY}` });
 
 class MapWidget extends Component {
+
   render() {
     return (
       <Map
@@ -16,13 +17,11 @@ class MapWidget extends Component {
         }}
         center={[-122.338743, 47.608635]}
         zoom={[15]} >
-          <Layer
-            type="symbol"
-            id="marker"
-            // layout={{ "icon-image": "marker-15" }}
-            layout={{ "icon-image": `${mapMarkerIcon}` }}>
-            <Feature coordinates={[-122.338743, 47.608635]}/>
-          </Layer>
+          <Marker
+            coordinates={[-122.338743, 47.608635]}
+            anchor="bottom">
+            <img src={mapMarkerIcon} height="45px" width="25px" />
+          </Marker>
           <Popup
             coordinates={[-122.338743, 47.608635]}
             offset={{
