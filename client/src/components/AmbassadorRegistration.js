@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
+const GOOGLEMAPS_API_KEY = process.env.REACT_APP_GOOGLEMAPS_API_KEY;
 
 class AmbassadorRegistration extends Component {
   constructor(props) {
@@ -15,6 +16,7 @@ class AmbassadorRegistration extends Component {
       homeAddressCity: '',
       homeAddressState: '',
       homeAddressZip: '',
+      homeAddressCoordinates: null,
       role: 'Neighborhood Ambassador',
       targetZip: ''
     };
@@ -32,16 +34,27 @@ class AmbassadorRegistration extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    console.log('form was submitted!', this.state);
-    axios.post('http://localhost:3001/auth/signup', this.state)
-      .then(result => {
-        console.log('success:', result);
-        // add newly-received token to localStorage
-        localStorage.setItem('loginToken', result.data.token);
-        // update user with a call to App.js
-        this.props.updateUser();
+    console.log('Form submitted:', this.state);
+    // pass address to Google Maps API to retrieve long/lat coordinates before adding user to db
+    let homeAddressStreetTransformed = this.state.homeAddressStreet.replace(' ','+');
+    let homeAddressCityTransformed = this.state.homeAddressStreet.replace(' ','+');
+    let homeAddressStateTransformed = this.state.homeAddressStreet.replace(' ','+');
+    let homeAddressZipTransformed = this.state.homeAddressStreet.replace(' ','+');
+    axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${homeAddressStreetTransformed}+${homeAddressCityTransformed},+${homeAddressStateTransformed}+${homeAddressZipTransformed}&key=${GOOGLEMAPS_API_KEY}`)
+      .then(res => {
+        console.log('Successfully reached Google Maps API:', res);
+        this.setState({ homeAddressCoordinates: [res.data.results[0].geometry.location.lng, res.data.results[0].geometry.location.lat] }, () => {
+          axios.post('http://localhost:3001/auth/signup', this.state)
+          .then(result => {
+            console.log('Successfully added user to db:', result);
+            // add newly-received token to localStorage
+            localStorage.setItem('loginToken', result.data.token);
+            // update user with a call to App.js
+            this.props.updateUser();
+          })
+        });
       })
-      .catch(err => { console.log('error', err) });
+      .catch(err => { console.log('Error:', err) })
   }
 
   render() {
