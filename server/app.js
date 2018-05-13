@@ -18,7 +18,6 @@ app.use(logger('dev'));
 app.use(bodyParser.json({limit: "50mb"}));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(cors());
-// app.use(express.static(path.resolve(__dirname, 'client', 'build')));
 
 // Controllers
 app.use('/auth', expressJWT({
@@ -37,10 +36,7 @@ app.use('/auth', expressJWT({
 }), require('./routes/auth'));
 
 app.use('/user', require('./routes/user'));
-
-// app.get('*', function(req, res, next) {
-// 	res.sendFile(path.resolve(__dirname, 'client', 'public', 'index.html'));
-// });
+app.use('/ambassadors', require('./routes/ambassadors'));
 
 // module.exports = app;
 app.listen(process.env.PORT || 3001);
