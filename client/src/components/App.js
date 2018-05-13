@@ -8,7 +8,6 @@ import Home from './Home';
 import Login from '../auth/Login';
 import Nav from '../layout/Nav';
 import Profile from './Profile';
-import Signup from '../auth/Signup';
 import AmbassadorRegistration from './AmbassadorRegistration';
 import HomebuyerRegistration from './HomebuyerRegistration';
 
@@ -63,7 +62,6 @@ class App extends Component {
             <Nav user={this.state.user} updateUser={this.getUser} />
               <Route exact path="/" component={ () => (<Home user={this.state.user} />) } />
               <Route path="/login" component={ () => (<Login user={this.state.user} updateUser={this.getUser} />) } />
-              <Route path="/signup" component={ () => (<Signup user={this.state.user} updateUser={this.getUser} />) } />
               <Route path="/profile" component={ () => (<Profile user={this.state.user} />) } />
               <Route path="/ambassador-registration" component={ () => (<AmbassadorRegistration user={this.state.user} updateUser={this.getUser} />) } />
               <Route path="/homebuyer-registration" component={ () => (<HomebuyerRegistration user={this.state.user} updateUser={this.getUser} />) } />
