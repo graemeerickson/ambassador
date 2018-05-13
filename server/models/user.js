@@ -35,8 +35,9 @@ var userSchema = new mongoose.Schema({
   homeAddressCity: String,
   homeAddressState: String,
   homeAddressZip: Number,
-  homeAddressCoordinates: [ Number ],
-  targetZip: Number
+  targetCity: String,
+  targetState: String,
+  locationCoordinates: [ Number ]
 });
 
 // Override 'toJSON' to prevent the password from being returned with the user
@@ -53,7 +54,9 @@ userSchema.set('toJSON', {
       homeAddressCity: user.homeAddressCity,
       homeAddressState: user.homeAddressState,
       homeAddressZip: user.homeAddressZip,
-      homeAddressCoordinates: user.homeAddressCoordinates,
+      targetCity: user.targetCity,
+      targetState: user.targetState,
+      locationCoordinates: user.locationCoordinates,
       targetZip: user.targetZip
     };
     return returnJson;
