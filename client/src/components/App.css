@@ -24,6 +24,11 @@ nav a:hover {
   color: rgb(85,119,187);
   text-decoration: none;
 }
+.ambassador-contact-btn {
+  font-size: 12px;
+  height: 30px;
+  width: 105px;
+}
 .btn {
   background-color: rgb(85,119,187);
   border-color: rgb(85,119,187);
