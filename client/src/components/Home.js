@@ -29,7 +29,7 @@ class Home extends Component {
         <br/>
         <h2>Sign up as:</h2>
         <Link to="/ambassador-registration"><button className="btn btn-primary role-button">Neighborhood Ambassador</button></Link>
-        <Link to="/homebuyer-registration"><button className="btn btn-primary role-button">Prospective Home-buyer</button></Link>
+        <Link to="/homebuyer-registration"><button className="btn btn-primary role-button">Prospective Homebuyer</button></Link>
       </div>
     );
   }
