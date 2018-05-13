@@ -16,16 +16,15 @@ class Login extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    console.log('form was submitted!', this.state);
     axios.post('http://localhost:3001/auth/login', this.state)
     .then(result => {
-      console.log('success:', result);
+      console.log('Success:', result);
       // add newly-received token to localStorage
       localStorage.setItem('loginToken', result.data.token);
       // update user with a call to App.js
       this.props.updateUser();
     })
-    .catch(err => { console.log('error', err.response.data); });
+    .catch(err => { console.log('Error', err.response.data); });
   }
 
   render() {
