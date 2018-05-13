@@ -1,76 +1,104 @@
 import React, {Component} from 'react';
-import ReactMapboxGL, { Marker, Popup, Cluster }  from 'react-mapbox-gl';
+import ReactMapboxGL, { Marker, Popup }  from 'react-mapbox-gl';
+import HomebuyerTargetLocation from './HomebuyerTargetLocation';
 import mapMarkerIcon from '../marker-icon.svg';
 import axios from 'axios';
-const MAPBOX_API_KEY = process.env.REACT_APP_MAPBOXAPI_KEY;
 
+const MAPBOX_API_KEY = process.env.REACT_APP_MAPBOXAPI_KEY;
 const Map = ReactMapboxGL({ accessToken: `${MAPBOX_API_KEY}` });
+let markers;
 
 class MapWidget extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-      homeAddressStreet: '',
-      homeAddressCity: '',
-      homeAddressState: '',
-      homeAddressZip: ''
+      targetCity: props.user.targetCity,
+      targetState: props.user.targetState,
+      centerLong: props.user.locationCoordinates[0],
+      centerLat: props.user.locationCoordinates[1]
     }
   }
 
   componentDidMount() {
+    this.getTargetLocation();   
+  }
+
+  getTargetLocation = () => {
     axios.get(`http://localhost:3001/user/${this.props.user.id}`)
       .then(res => {
-        this.setState({
-          homeAddressStreet: res.data.homeAddressStreet,
-          homeAddressCity: res.data.homeAddressCity,
-          homeAddressState: res.data.homeAddressState,
-          homeAddressZip: res.data.homeAddressZip
-        })
+        if (res.data.role[0] === 'Prospective Homebuyer') {
+          this.setState({
+            centerLong: res.data.locationCoordinates[0],
+            centerLat: res.data.locationCoordinates[1],
+            targetCity: res.data.targetCity,
+            targetState: res.data.targetState
+          })
+        }
+        else {
+          this.setState({
+            centerLong: res.data.locationCoordinates[0],
+            centerLat: res.data.locationCoordinates[1]
+          })
+        }
       })
   }
 
-  displayPopup() {
-    console.log('hello popup')
+  displayPopup(e) {
+    console.log('popup:',e.target)
     return (
       <Popup
-        coordinates={[-122.338743, 47.608635]}
+        coordinates={[e.target.attributes.getNamedItem('data-long').value, e.target.attributes.getNamedItem('data-lat').value]}
+        anchor="top"
         offset={{
           'bottom-left': [12, -38],  'bottom': [0, -38], 'bottom-right': [-12, -38]
         }}>
-        <span>Ambassador</span>
+        <div>POPUP</div>
       </Popup>
     )
   }
 
-  // clusterMarker = (coordinates) => (
-  //   <Marker coordinates={coordinates} style={styles.clusterMarker}>
-  //     C
-  //   </Marker>
-  // );
-
   render() {
+    axios.get('http://localhost:3001/ambassadors')
+      .then(res => {
+        markers = res.data.map( ambassador => {
+          return (
+            <div>
+              <Marker
+                coordinates={[ambassador.locationCoordinates[0], ambassador.locationCoordinates[1]]}
+                anchor="bottom"
+                onClick={this.displayPopup}>
+                <img alt="ambassador-popup-info" src={mapMarkerIcon} height="45px" width="25px" data-long={ambassador.locationCoordinates[0]} data-lat={ambassador.locationCoordinates[1]} data-firstname={ambassador.firstName} data-lastname={ambassador.lastName} data-email={ambassador.email} data-phonenumber={ambassador.phoneNumber} />
+              </Marker>
+              <Popup
+                coordinates={[ambassador.locationCoordinates[0],ambassador.locationCoordinates[1]]}
+                offset={{
+                  'bottom-left': [12, -38],  'bottom': [0, -38], 'bottom-right': [-12, -38]
+                }}
+                anchor="bottom">
+                <span>Ambassador: {ambassador.firstName}&nbsp;{ambassador.lastName}</span><br/>
+                <span>Phone: {ambassador.phoneNumber}</span><br/>
+                <span>Email {ambassador.email}</span><br/>
+                <button className="btn btn-primary btn-sm ambassador-contact-btn">Contact {ambassador.firstName}</button>
+              </Popup>
+            </div>
+          )
+        })
+      })
+
     return (
-      <Map
-        style={"mapbox://styles/mapbox/streets-v9"}
-        containerStyle={{
-          height: "500px",
-          width: "500px"
-        }}
-        center={[-122.338743, 47.608635]}
-        zoom={[15]} >
-          <Marker
-            coordinates={[this.props.user.homeAddressCoordinates[0], this.props.user.homeAddressCoordinates[1]]}
-            anchor="bottom"
-            onClick={this.displayPopup}>
-            <img alt={"-122.338743, 47.608635"} src={mapMarkerIcon} height="45px" width="25px" />
-          </Marker>
-          <Marker
-            coordinates={[-122.0569198, 47.6477448]}
-            anchor="bottom"
-            onClick={this.displayPopup}>
-            <img alt={"-122.0569198, 47.6477448"} src={mapMarkerIcon} height="45px" width="25px" />
-          </Marker>
-      </Map>
+      <div>
+        <HomebuyerTargetLocation user={this.props.user} updateTargetLocation={this.getTargetLocation} />
+        <Map
+          style={"mapbox://styles/mapbox/streets-v9"}
+          containerStyle={{
+            height: "500px",
+            width: "700px"
+          }}
+          center={[this.state.centerLong, this.state.centerLat]}
+          zoom={[15]} >
+            {markers}
+        </Map>
+      </div>
     );
   }
 }
