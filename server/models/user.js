@@ -35,8 +35,7 @@ var userSchema = new mongoose.Schema({
   homeAddressCity: String,
   homeAddressState: String,
   homeAddressZip: Number,
-  targetCity: String,
-  targetState: String,
+  targetAddress: String,
   locationCoordinates: [ Number ]
 });
 
@@ -54,10 +53,8 @@ userSchema.set('toJSON', {
       homeAddressCity: user.homeAddressCity,
       homeAddressState: user.homeAddressState,
       homeAddressZip: user.homeAddressZip,
-      targetCity: user.targetCity,
-      targetState: user.targetState,
+      targetAddress: user.targetAddress,
       locationCoordinates: user.locationCoordinates,
-      targetZip: user.targetZip
     };
     return returnJson;
   }
