@@ -5,22 +5,21 @@ import mapMarkerIcon from '../marker-icon.svg';
 import axios from 'axios';
 
 const MAPBOX_API_KEY = process.env.REACT_APP_MAPBOXAPI_KEY;
-const Map = ReactMapboxGL({ accessToken: `${MAPBOX_API_KEY}` });
+const Map = ReactMapboxGL({ accessToken: MAPBOX_API_KEY });
 let markers;
 
 class MapWidget extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      targetCity: props.user.targetCity,
-      targetState: props.user.targetState,
+      targetAddress: props.user.targetAddress,
       centerLong: props.user.locationCoordinates[0],
       centerLat: props.user.locationCoordinates[1]
     }
   }
 
   componentDidMount() {
-    this.getTargetLocation();   
+    this.getTargetLocation();
   }
 
   getTargetLocation = () => {
@@ -30,8 +29,7 @@ class MapWidget extends Component {
           this.setState({
             centerLong: res.data.locationCoordinates[0],
             centerLat: res.data.locationCoordinates[1],
-            targetCity: res.data.targetCity,
-            targetState: res.data.targetState
+            targetAddress: res.data.targetAddress
           })
         }
         else {
@@ -77,8 +75,8 @@ class MapWidget extends Component {
                 anchor="bottom">
                 <span>Ambassador: {ambassador.firstName}&nbsp;{ambassador.lastName}</span><br/>
                 <span>Phone: {ambassador.phoneNumber}</span><br/>
-                <span>Email {ambassador.email}</span><br/>
-                <button className="btn btn-primary btn-sm ambassador-contact-btn">Contact {ambassador.firstName}</button>
+                <span>Email: {ambassador.email}</span><br/>
+                <button className="btn btn-primary btn-sm text-center ambassador-contact-btn">Contact {ambassador.firstName}</button>
               </Popup>
             </div>
           )
@@ -88,16 +86,20 @@ class MapWidget extends Component {
     return (
       <div>
         <HomebuyerTargetLocation user={this.props.user} updateTargetLocation={this.getTargetLocation} />
-        <Map
-          style={"mapbox://styles/mapbox/streets-v9"}
-          containerStyle={{
-            height: "500px",
-            width: "700px"
-          }}
-          center={[this.state.centerLong, this.state.centerLat]}
-          zoom={[15]} >
-            {markers}
-        </Map>
+        <div className="row">
+          <div className="col-12">
+            <Map
+              style={"mapbox://styles/mapbox/streets-v9"}
+              containerStyle={{
+                height: "500px",
+                width: "100%"
+              }}
+              center={[this.state.centerLong, this.state.centerLat]}
+              zoom={[14]} >
+                {markers}
+            </Map>
+          </div>
+        </div>
       </div>
     );
   }
