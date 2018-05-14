@@ -6,21 +6,18 @@ class HomebuyerTargetLocation extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      targetCity: '',
-      targetState: '',
+      targetAddress: '',
       locationCoordinates: null
     }
   }
 
-  handleTargetCityChange = (e) => { this.setState({ targetCity: e.target.value }); }
-  handleTargetStateChange = (e) => { this.setState({ targetState: e.target.value }); }
+  handleTargetAddressChange = (e) => { this.setState({ targetAddress: e.target.value }); }
 
   handleSubmit = (e) => {
     e.preventDefault();
     console.log('form submitted:', this.state)
-    let targetCityTransformed = this.state.targetCity.replace(' ','+');
-    let targetStateTransformed = this.state.targetState.replace(' ','+');
-    axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${targetCityTransformed},+${targetStateTransformed}&key=${GOOGLEMAPS_API_KEY}`)
+    let targetAddressTransformed = this.state.targetAddress.replace(' ','+');
+    axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${targetAddressTransformed}&key=${GOOGLEMAPS_API_KEY}`)
       .then(res => {
         console.log('Successfully reached Google Maps API:', res);
         this.setState({ locationCoordinates: [res.data.results[0].geometry.location.lng, res.data.results[0].geometry.location.lat] }, () => {
@@ -39,14 +36,17 @@ class HomebuyerTargetLocation extends Component {
   render() {
     if (this.props.user.role[0] === 'Prospective Homebuyer') {
       return(
-        <div>
+        <div className="row">
+          <div className="col-12">
           <form onSubmit={this.handleSubmit}>
-            <div className="form-group form-inline">
-              <input name="targetCity" type="text" className="form-control" placeholder="Desired city" value={this.state.targetCity} onChange={this.handleTargetCityChange} />&nbsp;&nbsp;
-              <input name="targetState" type="text" className="form-control" placeholder="Desired state" value={this.state.targetState} onChange={this.handleTargetStateChange} />&nbsp;&nbsp;
-              <input type="submit" className="btn btn-primary" value="Update map" />
+            <div className="input-group mb-3">
+              <input name="targetAddress" type="text" className="form-control" placeholder="Enter desired address, or just a city & state for now" value={this.state.targetAddress} onChange={this.handleTargetAddressChange} aria-label="Target address" aria-describedby="target-address" />
+              <div className="input-group-append">
+                <button type="submit" className="btn btn-primary">Update map</button>
+              </div>
             </div>
           </form>
+          </div>
         </div>
       )
     }
