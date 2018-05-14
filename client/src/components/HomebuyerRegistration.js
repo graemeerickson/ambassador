@@ -12,13 +12,8 @@ class HomebuyerRegistration extends Component {
       email: '',
       password: '',
       phoneNumber: '',
-      homeAddressStreet: '',
-      homeAddressCity: '',
-      homeAddressState: '',
-      homeAddressZip: '',
       role: 'Prospective Homebuyer',
-      targetCity: '',
-      targetState: '',
+      targetAddress: '',
       locationCoordinates: null
     };
   }
@@ -28,16 +23,14 @@ class HomebuyerRegistration extends Component {
   handleEmailChange = (e) => { this.setState({ email: e.target.value }); }
   handlePasswordChange = (e) => { this.setState({ password: e.target.value }); }
   handlePhoneNumberChange = (e) => { this.setState({ phoneNumber: e.target.value }); }
-  handleTargetCityChange = (e) => { this.setState({ targetCity: e.target.value }); }
-  handleTargetStateChange = (e) => { this.setState({ targetState: e.target.value }); }
+  handleTargetAddressChange = (e) => { this.setState({ targetCity: e.target.value }); }
 
   handleSubmit = (e) => {
     e.preventDefault();
     console.log('Form submitted:', this.state);
     // pass address to Google Maps API to retrieve long/lat coordinates before adding user to db
-    let targetCityTransformed = this.state.targetCity.replace(' ','+');
-    let targetStateTransformed = this.state.targetState.replace(' ','+');
-    axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${targetCityTransformed}+${targetStateTransformed}&key=${GOOGLEMAPS_API_KEY}`)
+    let targetAddressTransformed = this.state.targetAddress.replace(' ','+');
+    axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${targetAddressTransformed}&key=${GOOGLEMAPS_API_KEY}`)
       .then(res => {
         console.log('Successfully reached Google Maps API:', res);
         this.setState({ locationCoordinates: [res.data.results[0].geometry.location.lng, res.data.results[0].geometry.location.lat] }, () => {
@@ -84,9 +77,8 @@ class HomebuyerRegistration extends Component {
             <input name="phoneNumber" type="text" className="form-control" placeholder="555-555-5555" value={this.state.phoneNumber} onChange={this.handlePhoneNumberChange} />
           </div>
           <div className="form-group">
-            <label htmlFor="targetAddress">Desired home city (if you know it)</label>
-            <input name="targetCity" type="text" className="form-control" placeholder="Seattle" value={this.state.targetCity} onChange={this.handleTargetCityChange} />
-            <input name="targetState" type="text" className="form-control" placeholder="WA" value={this.state.targetState} onChange={this.handleTargetStateChange} />
+            <label htmlFor="targetAddress">Desired home address, or just city & state for now</label>
+            <input name="targetAddress" type="text" className="form-control" placeholder="400 Broad St, Seattle, WA 98109" value={this.state.targetAddress} onChange={this.handleTargetAddressChange} />
           </div>
           <button type="submit" className="btn btn-primary">Submit</button>
         </form>
