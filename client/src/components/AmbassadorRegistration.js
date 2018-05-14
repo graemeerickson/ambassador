@@ -18,7 +18,6 @@ class AmbassadorRegistration extends Component {
       homeAddressZip: '',
       locationCoordinates: null,
       role: 'Neighborhood Ambassador',
-      targetZip: ''
     };
   }
 
