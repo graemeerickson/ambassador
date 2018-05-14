@@ -37,13 +37,13 @@ class Login extends Component {
         <br/>
         <h2>Log into your account</h2><br/>
         <form onSubmit={this.handleSubmit}>
-          <div className="form-group">
+          <div className="form-group form-inline">
             <label htmlFor="email">Email address: </label>
-            <input name="Email" placeholder="johnny@appleseed.com" value={this.state.email} onChange={this.handleEmailChange} />
+            <input name="Email" className="form-control" placeholder="johnny@appleseed.com" value={this.state.email} onChange={this.handleEmailChange} />
           </div>
-          <div className="form-group">
+          <div className="form-group form-inline">
             <label htmlFor="password">Password: </label>
-            <input name="Password" type="password" value={this.state.password} onChange={this.handlePasswordChange} />
+            <input name="Password" className="form-control" type="password" value={this.state.password} onChange={this.handlePasswordChange} />
           </div>
           <input type="submit" value="Login" className="btn btn-primary" />
         </form>
