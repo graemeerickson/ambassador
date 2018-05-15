@@ -16,7 +16,7 @@ class HomebuyerTargetLocation extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    console.log('form submitted:', this.state)
+    console.log('Form submitted:', this.state)
     let targetAddressTransformed = this.state.targetAddress.replace(' ','+');
     axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${targetAddressTransformed}&key=${GOOGLEMAPS_API_KEY}`)
       .then(res => {
