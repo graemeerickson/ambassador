@@ -56,6 +56,7 @@ nav a:hover {
 }
 .card {
   border-radius: 5px;
+  margin-bottom: 15px;
 }
 .card-text {
   color: #8F9193;
@@ -68,6 +69,7 @@ nav a:hover {
   background-repeat: no-repeat;
   background-size: contain;
   height: 350px;
+  margin-bottom: 17px;
 }
 .logo {
   height: 55px;
@@ -78,8 +80,8 @@ nav a:hover {
   padding-bottom: 13px;
 }
 .nav-item .active {
-  padding-bottom: 13px;
   border-bottom: 5px solid rgb(85,119,187);
+  padding-bottom: 13px;
 }
 .nav-link {
   padding-top: 20px;
