@@ -73,9 +73,20 @@ nav a:hover {
   height: 55px;
   width: 55px;
 }
+.nav-item {
+  display: inline;
+  padding-bottom: 13px;
+}
+.nav-item .active {
+  padding-bottom: 13px;
+  border-bottom: 5px solid rgb(85,119,187);
+}
 .nav-link {
-  display: block;
-  float: right;
+  padding-top: 20px;
+}
+.nav-list {
+  list-style-type: none;
+  margin-bottom: 0;
 }
 .profile-paragraph {
   margin-left: 10px;
