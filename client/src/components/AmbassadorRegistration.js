@@ -34,7 +34,7 @@ class AmbassadorRegistration extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Form submitted:', this.state);
+    console.log('Form submitted');
     // pass address to Google Maps API to retrieve long/lat coordinates before adding user to db
     let homeAddressStreetTransformed = this.state.homeAddressStreet.replace(' ','+');
     let homeAddressCityTransformed = this.state.homeAddressCity.replace(' ','+');
@@ -42,11 +42,11 @@ class AmbassadorRegistration extends Component {
     let homeAddressZipTransformed = this.state.homeAddressZip.replace(' ','+');
     axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${homeAddressStreetTransformed}+${homeAddressCityTransformed},+${homeAddressStateTransformed}+${homeAddressZipTransformed}&key=${GOOGLEMAPS_API_KEY}`)
       .then(res => {
-        console.log('Successfully reached Google Maps API:', res);
+        console.log('Successfully reached Google Maps API');
         this.setState({ locationCoordinates: [res.data.results[0].geometry.location.lng, res.data.results[0].geometry.location.lat] }, () => {
           axios.post(SERVER_URL + '/auth/signup', this.state)
           .then(result => {
-            console.log('Successfully added user to db:', result);
+            console.log('Successfully added user to db');
             // add newly-received token to localStorage
             localStorage.setItem('loginToken', result.data.token);
             // update user with a call to App.js
