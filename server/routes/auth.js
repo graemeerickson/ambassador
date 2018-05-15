@@ -1,13 +1,13 @@
 require('dotenv').config();
 var express = require('express');
 var router = express.Router();
+var jwt = require('jsonwebtoken');
 var mongoose = require('mongoose');
 var User = require('../models/user');
-var jwt = require('jsonwebtoken');
 
 // POST /auth/login route - returns a JWT
 router.post('/login', function(req, res) {
-  console.log('/auth/login post route', req.body);
+  console.log('/auth/login POST route');
   
   // first check if user exists
   User.findOne({ email: req.body.email })
@@ -31,7 +31,7 @@ router.post('/login', function(req, res) {
 
 // POST /auth/signup route - create a user in the DB and then log them in
 router.post('/signup', function(req, res) {
-  console.log('/auth/signup post route', req.body);
+  console.log('/auth/signup POST route');
   
   // first check if the user already exists
   User.findOne({ email: req.body.email })
