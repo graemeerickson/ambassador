@@ -57,7 +57,7 @@ userSchema.set('toJSON', {
       homeAddressState: user.homeAddressState,
       homeAddressZip: user.homeAddressZip,
       targetAddress: user.targetAddress,
-      locationCoordinates: user.locationCoordinates,
+      locationCoordinates: user.locationCoordinates
     };
     return returnJson;
   }
