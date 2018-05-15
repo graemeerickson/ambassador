@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
-import classnames from 'classnames';
 
 class Nav extends Component {
   constructor(props) {
@@ -22,7 +21,6 @@ class Nav extends Component {
 
   render() {
     let links = '';
-    let classes = classnames('specialbutton', {active: this.state.active});
     if (this.props.user) {
       links = (
         <span className="nav-link">
