@@ -1,7 +1,17 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import classnames from 'classnames';
 
 class Nav extends Component {
+  constructor(props) {
+      super(props);
+      this.state = {active: false};
+  }
+
+  click() {
+    this.setState({active: true});
+  }
+
   handleLogout = (e) => {
     console.log('logging out...');
     e.preventDefault();
@@ -11,9 +21,11 @@ class Nav extends Component {
 
   render() {
     let links = '';
+    let classes = classnames('specialbutton', {active: this.state.active});
     if (this.props.user) {
       links = (
         <span className="nav-link">
+          <Link to="/">Dashboard</Link>
           <Link to="/profile">Profile</Link>
           <Link to="/" onClick={this.handleLogout}>Logout</Link>
         </span>
