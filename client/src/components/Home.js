@@ -9,7 +9,7 @@ class Home extends Component {
         return(
           <div>
             <br/>
-            <p>Ambassador dashboard</p>
+            <h4>Find & connect with other ambassadors in your neighborhood:</h4><br/>
             <MapWidget user={this.props.user} />
           </div>
         );
@@ -18,7 +18,7 @@ class Home extends Component {
         return(
           <div>
             <br/>
-            <p>Prospective Homebuyer dashboard</p>
+            <h4>Find & connect with neighborhood ambassadors in your next community:</h4><br/>
             <MapWidget user={this.props.user} />
           </div>
         );
@@ -26,10 +26,60 @@ class Home extends Component {
     }
     return(
       <div>
-        <br/>
-        <h2>Sign up as:</h2>
-        <Link to="/ambassador-registration"><button className="btn btn-primary role-button">Neighborhood Ambassador</button></Link>
-        <Link to="/homebuyer-registration"><button className="btn btn-primary role-button">Prospective Homebuyer</button></Link>
+        <br/><br/>
+        <div className="splash-area"></div>
+        <div className="jumbotron jumbotron-fluid home-jumbotron">
+          <div className="container">
+            <h1 className="display-4">Ambassador</h1>
+            <p className="lead">Connecting homebuyers with <br/>neighborhood communities.</p>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-sm-6">
+            <div className="card">
+              <div className="card-body">
+                <h5 className="card-title">Prospective Homebuyer</h5><br/>
+                <table className="benefits-list">
+                  <tr>
+                    <td className="benefits-list-item-icon"><i className="far fa-comments benefits-icon"></i></td>
+                    <td className="benefits-list-item"><span className="card-text">&nbsp;&nbsp;&nbsp;Get connected.</span></td>
+                  </tr><br/>
+                  <tr>
+                    <td className="benefits-list-item-icon"><i className="fab fa-pagelines benefits-icon"></i></td>
+                    <td className="benefits-list-item"><span className="card-text">&nbsp;&nbsp;&nbsp;Find peace of mind.</span></td>
+                  </tr><br/>
+                  <tr>
+                    <td className="benefits-list-item-icon"><i className="fas fa-map-marker benefits-icon"></i></td>
+                    <td className="benefits-list-item"><span className="card-text">&nbsp;&nbsp;&nbsp;Learn from the locals.</span></td>
+                  </tr>
+                </table>
+                <Link to="/homebuyer-registration"><button className="btn btn-primary role-button float-right">Get started</button></Link>
+              </div>
+            </div>
+          </div>
+          <div className="col-sm-6">
+            <div className="card">
+              <div className="card-body">
+                <h5 className="card-title">Neighborhood Ambassador</h5><br/>
+                <table className="benefits-list">
+                  <tr>
+                    <td className="benefits-list-item-icon"><i className="fas fa-home benefits-icon"></i></td>
+                    <td className="benefits-list-item"><span className="card-text">&nbsp;&nbsp;&nbsp;Represent your neighborhood.</span></td>
+                  </tr><br/>
+                  <tr>
+                    <td className="benefits-list-item-icon"><i className="fas fa-users benefits-icon"></i></td>
+                    <td className="benefits-list-item"><span className="card-text">&nbsp;&nbsp;&nbsp;Build community.</span></td>
+                  </tr><br/>
+                  <tr>
+                    <td className="benefits-list-item-icon"><i className="fas fa-dollar-sign benefits-icon"></i></td>
+                    <td className="benefits-list-item"><span className="card-text">&nbsp;&nbsp;&nbsp;Earn rewards.</span></td>
+                  </tr>
+                </table>
+                <Link to="/ambassador-registration"><button className="btn btn-primary role-button float-right">Get started</button></Link>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
