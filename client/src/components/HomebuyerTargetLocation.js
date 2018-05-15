@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { SERVER_URL } from '../constants';
 const GOOGLEMAPS_API_KEY = process.env.REACT_APP_GOOGLEMAPS_API_KEY;
 
 class HomebuyerTargetLocation extends Component {
@@ -21,7 +22,7 @@ class HomebuyerTargetLocation extends Component {
       .then(res => {
         console.log('Successfully reached Google Maps API:', res);
         this.setState({ locationCoordinates: [res.data.results[0].geometry.location.lng, res.data.results[0].geometry.location.lat] }, () => {
-          axios.put(`http://localhost:3001/user/${this.props.user.id}`, this.state)
+          axios.put(SERVER_URL + `/user/${this.props.user.id}`, this.state)
             .then(res => {
               console.log('PUT request succeeded:', res)
               this.props.updateTargetLocation();
