@@ -19,7 +19,7 @@ class Login extends Component {
     e.preventDefault();
     axios.post(SERVER_URL + '/auth/login', this.state)
     .then(result => {
-      console.log('Success:', result);
+      console.log('Success');
       // add newly-received token to localStorage
       localStorage.setItem('loginToken', result.data.token);
       // update user with a call to App.js
