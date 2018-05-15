@@ -45,9 +45,8 @@ class MapWidget extends Component {
   }
 
   togglePopup = (e) => {
-    console.log('e.target.parentNode:',e.target.parentNode)
-    console.log('e.target.parentNode.nextSibling:', e.target.parentNode.nextSibling)
-    this.setState({isOpen: !this.state.isOpen})
+    let currentMarkerPopup = e.target.parentNode.nextSibling;
+    currentMarkerPopup.style.display === 'none' ? currentMarkerPopup.style.display = 'block' : currentMarkerPopup.style.display = 'none'
   }
 
   render() {
@@ -66,8 +65,6 @@ class MapWidget extends Component {
               </Marker>
               <Popup
                 coordinates={[ambassador.locationCoordinates[0],ambassador.locationCoordinates[1]]}
-                // offset={{ 'bottom-left': [12, -38], 'bottom': [0, -38], 'bottom-right': [-12, -38] }}
-                // anchor="top-left"
                 anchor="top-left"
                 style={{display: this.state.isOpen ? 'block' : 'none'}} 
                 >
