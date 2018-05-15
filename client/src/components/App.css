@@ -1,4 +1,9 @@
 /* CUSTOM STYLES */
+body {
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
+}
 input {
   border-radius: 5px;
   margin-bottom: 5px;
