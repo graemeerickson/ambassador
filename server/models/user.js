@@ -10,7 +10,7 @@ var userSchema = new mongoose.Schema({
   },
   lastName: {
     type: String,
-    required: true,
+    required: false,
     minlength: 1,
     maxlength: 99
   },
@@ -36,7 +36,10 @@ var userSchema = new mongoose.Schema({
   homeAddressState: String,
   homeAddressZip: Number,
   targetAddress: String,
-  locationCoordinates: [ Number ]
+  locationCoordinates: {
+    type: [ Number ],
+    required: true
+  }
 });
 
 // Override 'toJSON' to prevent the password from being returned with the user
