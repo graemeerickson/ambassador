@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+import AmbassadorRegistration from './AmbassadorRegistration';
 import axios from 'axios';
-import './App.css';
-import 'mapbox-gl/dist/mapbox-gl.css'
 import Home from './Home';
+import HomebuyerRegistration from './HomebuyerRegistration';
 import Login from '../auth/Login';
 import Nav from '../layout/Nav';
 import Profile from './Profile';
-import AmbassadorRegistration from './AmbassadorRegistration';
-import HomebuyerRegistration from './HomebuyerRegistration';
+import './App.css';
+import 'mapbox-gl/dist/mapbox-gl.css'
 import { SERVER_URL } from '../constants';
 
 class App extends Component {
