@@ -45,7 +45,7 @@ class MapWidget extends Component {
 
   togglePopup = (e) => {
     let currentMarkerPopup = e.target.parentNode.nextSibling;
-    currentMarkerPopup.style.display === 'none' ? currentMarkerPopup.style.display = 'block' : currentMarkerPopup.style.display = 'none'
+    currentMarkerPopup.style.display === 'none' ? currentMarkerPopup.style.display = 'block' : currentMarkerPopup.style.display = 'none';
   }
 
   render() {
