@@ -1,14 +1,13 @@
 import React, {Component} from 'react';
 import ReactMapboxGL, { Marker, Popup }  from 'react-mapbox-gl';
 import HomebuyerTargetLocation from './HomebuyerTargetLocation';
-import mapMarkerIcon from '../marker-icon.svg';
 import axios from 'axios';
+import mapMarkerIcon from '../marker-icon.svg';
 import { SERVER_URL } from '../constants';
 
 const MAPBOX_API_KEY = process.env.REACT_APP_MAPBOXAPI_KEY;
 const Map = ReactMapboxGL({ accessToken: MAPBOX_API_KEY });
 let markers;
-var popupDisplayStatus = 'none';
 
 class MapWidget extends Component {
   constructor(props) {
@@ -59,15 +58,13 @@ class MapWidget extends Component {
                 coordinates={[ambassador.locationCoordinates[0], ambassador.locationCoordinates[1]]}
                 anchor="bottom"
                 onClick={this.togglePopup}
-                key={index}
-                id={index} >
+                key={index} >
                 <img alt="ambassador-popup-info" src={mapMarkerIcon} height="45px" width="25px" data-long={ambassador.locationCoordinates[0]} data-lat={ambassador.locationCoordinates[1]} data-firstname={ambassador.firstName} data-lastname={ambassador.lastName} data-email={ambassador.email} data-phonenumber={ambassador.phoneNumber} />
               </Marker>
               <Popup
                 coordinates={[ambassador.locationCoordinates[0],ambassador.locationCoordinates[1]]}
                 anchor="top-left"
-                style={{display: this.state.isOpen ? 'block' : 'none'}} 
-                >
+                style={{display: this.state.isOpen ? 'block' : 'none'}} >
                 <span>Ambassador: {ambassador.firstName}&nbsp;{ambassador.lastName}</span><br/>
                 <span>Phone: {ambassador.phoneNumber}</span><br/>
                 <span>Email: {ambassador.email}</span><br/>
