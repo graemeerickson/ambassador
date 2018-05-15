@@ -3,10 +3,12 @@ import ReactMapboxGL, { Marker, Popup }  from 'react-mapbox-gl';
 import HomebuyerTargetLocation from './HomebuyerTargetLocation';
 import mapMarkerIcon from '../marker-icon.svg';
 import axios from 'axios';
+import { SERVER_URL } from '../constants';
 
 const MAPBOX_API_KEY = process.env.REACT_APP_MAPBOXAPI_KEY;
 const Map = ReactMapboxGL({ accessToken: MAPBOX_API_KEY });
 let markers;
+var popupDisplayStatus = 'none';
 
 class MapWidget extends Component {
   constructor(props) {
@@ -14,7 +16,8 @@ class MapWidget extends Component {
     this.state = {
       targetAddress: props.user.targetAddress,
       centerLong: props.user.locationCoordinates[0],
-      centerLat: props.user.locationCoordinates[1]
+      centerLat: props.user.locationCoordinates[1],
+      isOpen: false
     }
   }
 
@@ -23,7 +26,7 @@ class MapWidget extends Component {
   }
 
   getTargetLocation = () => {
-    axios.get(`http://localhost:3001/user/${this.props.user.id}`)
+    axios.get(SERVER_URL + `/user/${this.props.user.id}`)
       .then(res => {
         if (res.data.role[0] === 'Prospective Homebuyer') {
           this.setState({
@@ -41,43 +44,38 @@ class MapWidget extends Component {
       })
   }
 
-  displayPopup(e) {
-    console.log('popup:',e.target)
-    return (
-      <Popup
-        coordinates={[e.target.attributes.getNamedItem('data-long').value, e.target.attributes.getNamedItem('data-lat').value]}
-        anchor="top"
-        offset={{
-          'bottom-left': [12, -38],  'bottom': [0, -38], 'bottom-right': [-12, -38]
-        }}>
-        <div>POPUP</div>
-      </Popup>
-    )
+  togglePopup = (e) => {
+    console.log('e.target.parentNode:',e.target.parentNode)
+    console.log('e.target.parentNode.nextSibling:', e.target.parentNode.nextSibling)
+    this.setState({isOpen: !this.state.isOpen})
   }
 
   render() {
-    axios.get('http://localhost:3001/ambassadors')
+    axios.get(SERVER_URL + '/ambassadors')
       .then(res => {
-        markers = res.data.map( ambassador => {
+        markers = res.data.map( (ambassador, index) => {
           return (
             <div>
               <Marker
                 coordinates={[ambassador.locationCoordinates[0], ambassador.locationCoordinates[1]]}
                 anchor="bottom"
-                onClick={this.displayPopup}>
+                onClick={this.togglePopup}
+                key={index}
+                id={index} >
                 <img alt="ambassador-popup-info" src={mapMarkerIcon} height="45px" width="25px" data-long={ambassador.locationCoordinates[0]} data-lat={ambassador.locationCoordinates[1]} data-firstname={ambassador.firstName} data-lastname={ambassador.lastName} data-email={ambassador.email} data-phonenumber={ambassador.phoneNumber} />
               </Marker>
               <Popup
                 coordinates={[ambassador.locationCoordinates[0],ambassador.locationCoordinates[1]]}
-                offset={{
-                  'bottom-left': [12, -38],  'bottom': [0, -38], 'bottom-right': [-12, -38]
-                }}
-                anchor="bottom">
+                // offset={{ 'bottom-left': [12, -38], 'bottom': [0, -38], 'bottom-right': [-12, -38] }}
+                // anchor="top-left"
+                anchor="top-left"
+                style={{display: this.state.isOpen ? 'block' : 'none'}} 
+                >
                 <span>Ambassador: {ambassador.firstName}&nbsp;{ambassador.lastName}</span><br/>
                 <span>Phone: {ambassador.phoneNumber}</span><br/>
                 <span>Email: {ambassador.email}</span><br/>
                 <button className="btn btn-primary btn-sm text-center ambassador-contact-btn">Contact {ambassador.firstName}</button>
-              </Popup>
+              </Popup> }
             </div>
           )
         })
@@ -91,7 +89,7 @@ class MapWidget extends Component {
             <Map
               style={"mapbox://styles/mapbox/streets-v9"}
               containerStyle={{
-                height: "500px",
+                height: "550px",
                 width: "100%"
               }}
               center={[this.state.centerLong, this.state.centerLat]}
