@@ -8,7 +8,6 @@ import Login from '../auth/Login';
 import Nav from '../layout/Nav';
 import Profile from './Profile';
 import './App.css';
-import 'mapbox-gl/dist/mapbox-gl.css'
 import { SERVER_URL } from '../constants';
 
 class App extends Component {
