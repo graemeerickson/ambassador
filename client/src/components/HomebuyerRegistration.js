@@ -33,7 +33,7 @@ class HomebuyerRegistration extends Component {
     let targetAddressTransformed = this.state.targetAddress.replace(' ','+');
     axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${targetAddressTransformed}&key=${GOOGLEMAPS_API_KEY}`)
       .then(res => {
-        console.log('Successfully reached Google Maps API');
+        console.log('Successfully reached Google Maps API', res.data.results);
         this.setState({ locationCoordinates: [res.data.results[0].geometry.location.lng, res.data.results[0].geometry.location.lat] }, () => {
           axios.post(SERVER_URL + '/auth/signup', this.state)
           .then(result => {
