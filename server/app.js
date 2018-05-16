@@ -3,7 +3,6 @@ var bodyParser = require('body-parser');
 var cors = require('cors');
 var express = require('express');
 var expressJWT = require('express-jwt');
-var favicon = require('serve-favicon');
 var logger = require('morgan');
 var mongoose = require('mongoose');
 var path = require('path');
