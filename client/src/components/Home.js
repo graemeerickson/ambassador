@@ -8,7 +8,7 @@ class Home extends Component {
       if (this.props.user.role[0] === 'Neighborhood Ambassador') {
         return(
           <div>
-            <br/><h4>Find & connect with other ambassadors in your neighborhood:</h4><br/>
+            <br/><h4>Find and connect with other ambassadors in your neighborhood:</h4><br/>
             <MapWidget user={this.props.user} />
           </div>
         );
@@ -16,7 +16,7 @@ class Home extends Component {
       else if (this.props.user.role[0] === 'Prospective Homebuyer') {
         return(
           <div>
-            <br/><h4>Find & connect with neighborhood ambassadors in your next community:</h4><br/>
+            <br/><h4>Find and connect with neighborhood ambassadors in your next community:</h4><br/>
             <MapWidget user={this.props.user} />
           </div>
         );
