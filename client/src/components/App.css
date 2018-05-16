@@ -62,10 +62,11 @@ nav a:hover {
 .card {
   border-radius: 5px;
   margin-bottom: 15px;
-  margin-top: 17px;
+  margin-top: 10px;
 }
 .card-text {
   color: #8F9193;
+  line-height: 35px;
 }
 .card-title {
   font-size: 22px;
