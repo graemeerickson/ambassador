@@ -41,18 +41,20 @@ class Home extends Component {
               <div className="card-body">
                 <h5 className="card-title">Prospective Homebuyer</h5><br/>
                 <table className="benefits-list">
-                  <tr>
-                    <td className="benefits-list-item-icon"><i className="far fa-comments benefits-icon"></i></td>
-                    <td className="benefits-list-item"><span className="card-text">&nbsp;&nbsp;&nbsp;Get connected.</span></td>
-                  </tr><br/>
-                  <tr>
-                    <td className="benefits-list-item-icon"><i className="fab fa-pagelines benefits-icon"></i></td>
-                    <td className="benefits-list-item"><span className="card-text">&nbsp;&nbsp;&nbsp;Find peace of mind.</span></td>
-                  </tr><br/>
-                  <tr>
-                    <td className="benefits-list-item-icon"><i className="fas fa-map-marker benefits-icon"></i></td>
-                    <td className="benefits-list-item"><span className="card-text">&nbsp;&nbsp;&nbsp;Learn from the locals.</span></td>
-                  </tr>
+                  <tbody>
+                    <tr>
+                      <td className="benefits-list-item-icon"><i className="far fa-comments benefits-icon"></i></td>
+                      <td className="benefits-list-item"><span className="card-text">&nbsp;&nbsp;&nbsp;Get connected.</span></td>
+                    </tr>
+                    <tr>
+                      <td className="benefits-list-item-icon"><i className="fab fa-pagelines benefits-icon"></i></td>
+                      <td className="benefits-list-item"><span className="card-text">&nbsp;&nbsp;&nbsp;Find peace of mind.</span></td>
+                    </tr>
+                    <tr>
+                      <td className="benefits-list-item-icon"><i className="fas fa-map-marker benefits-icon"></i></td>
+                      <td className="benefits-list-item"><span className="card-text">&nbsp;&nbsp;&nbsp;Learn from the locals.</span></td>
+                    </tr>
+                  </tbody>
                 </table>
                 <Link to="/homebuyer-registration"><button className="btn btn-primary role-button float-right">Get started</button></Link>
               </div>
@@ -63,18 +65,20 @@ class Home extends Component {
               <div className="card-body">
                 <h5 className="card-title">Neighborhood Ambassador</h5><br/>
                 <table className="benefits-list">
-                  <tr>
-                    <td className="benefits-list-item-icon"><i className="fas fa-home benefits-icon"></i></td>
-                    <td className="benefits-list-item"><span className="card-text">&nbsp;&nbsp;&nbsp;Represent your neighborhood.</span></td>
-                  </tr><br/>
-                  <tr>
-                    <td className="benefits-list-item-icon"><i className="fas fa-users benefits-icon"></i></td>
-                    <td className="benefits-list-item"><span className="card-text">&nbsp;&nbsp;&nbsp;Build community.</span></td>
-                  </tr><br/>
-                  <tr>
-                    <td className="benefits-list-item-icon"><i className="fas fa-dollar-sign benefits-icon"></i></td>
-                    <td className="benefits-list-item"><span className="card-text">&nbsp;&nbsp;&nbsp;Earn rewards.</span></td>
-                  </tr>
+                  <tbody>
+                    <tr>
+                      <td className="benefits-list-item-icon"><i className="fas fa-home benefits-icon"></i></td>
+                      <td className="benefits-list-item"><span className="card-text">&nbsp;&nbsp;&nbsp;Represent your neighborhood.</span></td>
+                    </tr>
+                    <tr>
+                      <td className="benefits-list-item-icon"><i className="fas fa-users benefits-icon"></i></td>
+                      <td className="benefits-list-item"><span className="card-text">&nbsp;&nbsp;&nbsp;Build community.</span></td>
+                    </tr>
+                    <tr>
+                      <td className="benefits-list-item-icon"><i className="fas fa-dollar-sign benefits-icon"></i></td>
+                      <td className="benefits-list-item"><span className="card-text">&nbsp;&nbsp;&nbsp;Earn rewards.</span></td>
+                    </tr>
+                  </tbody>
                 </table>
                 <Link to="/ambassador-registration"><button className="btn btn-primary role-button float-right">Get started</button></Link>
               </div>
