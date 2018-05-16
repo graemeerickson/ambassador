@@ -25,11 +25,14 @@ class Home extends Component {
     return(
       <div>
         <br/><br/>
-        <div className="splash-area"></div>
-        <div className="jumbotron jumbotron-fluid home-jumbotron">
-          <div className="container">
-            <h1 className="display-4">Ambassador</h1>
-            <p className="lead">Connecting homebuyers with <br/>neighborhood communities.</p>
+        <div className="row">
+          <div className="col-12">
+            <div className="jumbotron jumbotron-fluid home-jumbotron">
+              <div className="container">
+                <h1 className="display-4">Ambassador</h1>
+                <p className="lead">Connecting homebuyers with <br/>neighborhood communities.</p>
+              </div>
+            </div>
           </div>
         </div>
         <div className="row">
