@@ -1,4 +1,6 @@
 
+Note: README still under development.
+
 # Ambassador
 [Get started as a Neighborhood Ambassador or Prospective Homebuyer now!](http://ambassador-graeme.herokuapp.com/ "Get started as a Neighborhood Ambassador or Prospective Homebuyer now")
 
