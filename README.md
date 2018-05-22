@@ -39,8 +39,8 @@ Ambassador's data model includes a User schema only:
 __Third Party APIs__
 
 Ambassador integrates with third party APIs for the following purposes:
-Mapbox: To display an interactive map with markers & popovers
-Google Maps: To obtain longitudinal / latitudinal coordinates associated with a physical address
+* Mapbox: To display an interactive map with markers & popovers
+* Google Maps: To obtain longitudinal / latitudinal coordinates associated with a physical address
 
 __Routes - Frontend__
 
