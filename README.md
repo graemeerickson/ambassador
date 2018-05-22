@@ -53,6 +53,7 @@ __Routes - Frontend__
 |/homebuyer-registration|HomebuyerRegistration|Render ambassador signup screen & handle registration functionality
 
 __Routes - Backend__
+
 |URL|Method|Purpose
 |--|--|--|
 |/auth/login|POST|Handle user login functionality and return JSON web token (JWT)
