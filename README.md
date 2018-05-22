@@ -58,9 +58,8 @@ __Routes - Backend__
 |--|--|--|
 |/auth/login|POST|Handle user login functionality and return JSON web token (JWT)
 |/auth/signup|POST|Create user in database, then log them in
-|/auth/me/from/token|POST|
+|/auth/me/from/token|POST|Receive user's token and return user details
 |/user|GET|Get all users from database
-|/user|POST|
 |/user/:id|GET|Get specific user by ID from database
 |/user/:id|PUT|Update prospective homebuyer user's target city, state, & location coordinates in the database
 |/ambassadors|GET|Get all users from database whose role is 'Neighborhood Ambassador'
