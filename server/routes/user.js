@@ -3,13 +3,6 @@ const router = express.Router();
 
 const db = require('../models/user');
 
-router.post('/', (req, res) => {
-  console.log("Received '/user' POST request");
-  db.find({_id: req.body.user.id}, (err, user) => {
-    res.send(user);
-  })
-})
-
 // get all users from db
 router.get('/', (req, res) => {
   console.log("Received '/user' GET request");
