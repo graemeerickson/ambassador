@@ -85,7 +85,8 @@ class MapWidget extends Component {
               style={`mapbox://styles/mapbox/streets-v9`}
               containerStyle={{
                 height: "550px",
-                width: "100%"
+                width: "100%",
+                borderRadius: "10px"
               }}
               center={[this.state.centerLong, this.state.centerLat]}
               zoom={[14]}
