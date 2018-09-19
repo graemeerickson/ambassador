@@ -1,25 +1,22 @@
 require('dotenv').config();
-var express = require('express');
-var router = express.Router();
-var jwt = require('jsonwebtoken');
-var mongoose = require('mongoose');
-var User = require('../models/user');
+const express = require('express');
+const router = express.Router();
+const jwt = require('jsonwebtoken');
+const mongoose = require('mongoose');
+const User = require('../models/user');
 
 // POST /auth/login route - returns a JWT
 router.post('/login', function(req, res) {
-  console.log('/auth/login POST route');
-  
   // first check if user exists
   User.findOne({ email: req.body.email })
     .then(function(user){
       // user not found, or password is incorrect
       if(!user || !user.password){ return res.status(403).send('User not found'); }
-      
       // user exists; validate password
       // password is invalid
       if(!user.authenticated(req.body.password)){ return res.status(401).send('Invalid credentials'); }
       // password is valid; create token
-      var token = jwt.sign(user.toJSON(), process.env.JWT_SECRET, { expiresIn: 60 * 60 * 24 })
+      let token = jwt.sign(user.toJSON(), process.env.JWT_SECRET, { expiresIn: 60 * 60 * 24 })
       // send token & user info
       res.send({ user: user, token: token });
     })
@@ -31,8 +28,6 @@ router.post('/login', function(req, res) {
 
 // POST /auth/signup route - create a user in the DB and then log them in
 router.post('/signup', function(req, res) {
-  console.log('/auth/signup POST route');
-  
   // first check if the user already exists
   User.findOne({ email: req.body.email })
     // successful database call
@@ -41,12 +36,11 @@ router.post('/signup', function(req, res) {
       if (user) {
         return res.status(400).send('User exists already');
       }
-
       // new user - create an account
       User.create(req.body)
         .then(function(createdUser){
           // make a token and sent it as JSON so that the user can remained logged in. toJSON function cleanses object of password
-          var token = jwt.sign(createdUser.toJSON(), process.env.JWT_SECRET, {
+          let token = jwt.sign(createdUser.toJSON(), process.env.JWT_SECRET, {
             expiresIn: 60 * 60 * 24 // 24 hours, in seconds
           });
           res.send({ user: createdUser, token: token });
