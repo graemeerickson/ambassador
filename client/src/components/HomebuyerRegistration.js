@@ -14,8 +14,7 @@ class HomebuyerRegistration extends Component {
       password: '',
       phoneNumber: '',
       role: 'Prospective Homebuyer',
-      targetAddress: '',
-      locationCoordinates: null
+      targetAddress: ''
     };
   }
 
@@ -27,15 +26,16 @@ class HomebuyerRegistration extends Component {
     let targetAddressTransformed = this.state.targetAddress.replace(' ','+');
     axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${targetAddressTransformed}&key=${GOOGLEMAPS_API_KEY}`)
       .then(res => {
-        this.setState({ locationCoordinates: [res.data.results[0].geometry.location.lng, res.data.results[0].geometry.location.lat] }, () => {
-          axios.post(SERVER_URL + '/auth/signup', this.state)
+        let userData = {};
+        userData = this.state;
+        userData.locationCoordinates = [res.data.results[0].geometry.location.lng, res.data.results[0].geometry.location.lat];
+        axios.post(SERVER_URL + '/auth/signup', userData)
           .then(result => {
             // add newly-received token to localStorage
             localStorage.setItem('loginToken', result.data.token);
             // update user with a call to App.js
             this.props.updateUser();
           })
-        });
       })
       .catch(err => { console.log('Error:', err) })
   }
