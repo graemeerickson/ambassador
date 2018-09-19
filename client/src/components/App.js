@@ -26,7 +26,6 @@ class App extends Component {
     // get user
     let token = localStorage.getItem('loginToken');
     if (token) {
-      // there is a token in localStorage; validate it
       axios.post(SERVER_URL + '/auth/me/from/token', {
         headers: { 'Authorization': `Bearer ${token}` }
       })
@@ -59,7 +58,7 @@ class App extends Component {
           <div>
             <div className="container">
               <Nav user={this.state.user} updateUser={this.getUser} />
-              <Route exact path="/" component={ () => (<Home user={this.state.user} />) } />
+              <Route exact path="/" component={ () => (<Home user={this.state.user} updateUser={this.getUser} />) } />
               <Route path="/login" component={ () => (<Login user={this.state.user} updateUser={this.getUser} />) } />
               <Route path="/profile" component={ () => (<Profile user={this.state.user} />) } />
               <Route path="/ambassador-registration" component={ () => (<AmbassadorRegistration user={this.state.user} updateUser={this.getUser} />) } />
