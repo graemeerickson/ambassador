@@ -12,17 +12,14 @@ class Login extends Component {
     };
   }
 
-  handleEmailChange = (e) => { this.setState({ email: e.target.value }); }
-  handlePasswordChange = (e) => { this.setState({ password: e.target.value }); }
+  handleChange = e => { this.setState({ [e.target.id]: e.target.value }); }
 
-  handleSubmit = (e) => {
+  handleSubmit = e => {
     e.preventDefault();
     axios.post(SERVER_URL + '/auth/login', this.state)
     .then(result => {
-      console.log('Success');
       // add newly-received token to localStorage
       localStorage.setItem('loginToken', result.data.token);
-      // update user with a call to App.js
       this.props.updateUser();
     })
     .catch(err => { console.log('Error', err.response.data); });
@@ -42,13 +39,13 @@ class Login extends Component {
             <div className="input-group-prepend">
               <span className="input-group-text" id="email">Email</span>
             </div>
-            <input name="email" type="email" className="form-control" placeholder="johnny@appleseed.com" aria-label="Email" aria-describedby="email" value={this.state.email} onChange={this.handleEmailChange} required />
+            <input id="email" name="email" type="email" className="form-control" placeholder="johnny@appleseed.com" aria-label="Email" aria-describedby="email" value={this.state.email} onChange={this.handleChange} required />
           </div>
           <div className="input-group mb-3 registration-input-group">
             <div className="input-group-prepend">
               <span className="input-group-text" id="password">Password</span>
             </div>
-            <input name="password" type="password" className="form-control" aria-label="Password" aria-describedby="password" value={this.state.password} onChange={this.handlePasswordChange} required />
+            <input id="password" name="password" type="password" className="form-control" aria-label="Password" aria-describedby="password" value={this.state.password} onChange={this.handleChange} required />
           </div>
           <input type="submit" value="Login" className="btn btn-primary" />
         </form>
