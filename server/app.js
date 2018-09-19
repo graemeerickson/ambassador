@@ -1,12 +1,12 @@
 require('dotenv').config();
-var bodyParser = require('body-parser');
-var cors = require('cors');
-var express = require('express');
-var expressJWT = require('express-jwt');
-var logger = require('morgan');
-var mongoose = require('mongoose');
-var path = require('path');
-var app = express();
+const bodyParser = require('body-parser');
+const cors = require('cors');
+const express = require('express');
+const expressJWT = require('express-jwt');
+const logger = require('morgan');
+const mongoose = require('mongoose');
+const path = require('path');
+const app = express();
 
 // Mongoose connect
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/ambassador');
@@ -36,5 +36,4 @@ app.use('/auth', expressJWT({
 app.use('/user', require('./routes/user'));
 app.use('/ambassadors', require('./routes/ambassadors'));
 
-// module.exports = app;
 app.listen(process.env.PORT || 3001);
