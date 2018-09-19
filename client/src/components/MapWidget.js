@@ -3,9 +3,9 @@ import ReactMapboxGL from 'react-mapbox-gl';
 import HomebuyerTargetLocation from './HomebuyerTargetLocation';
 import AmbassadorMarker from './AmbassadorMarker';
 import axios from 'axios';
-// import mapMarkerIcon from '../marker-icon.svg';
 import { SERVER_URL } from '../constants';
 
+const GOOGLEMAPS_API_KEY = process.env.REACT_APP_GOOGLEMAPS_API_KEY;
 const MAPBOX_API_KEY = process.env.REACT_APP_MAPBOXAPI_KEY;
 const Map = ReactMapboxGL({ accessToken: MAPBOX_API_KEY });
 let markers;
@@ -21,26 +21,24 @@ class MapWidget extends Component {
     }
   }
 
-  componentDidMount() {
-    this.getTargetLocation();
-  }
-
-  getTargetLocation = () => {
-    axios.get(SERVER_URL + `/user/${this.props.user.id}`)
+  updateTargetLocation = targetAddress => {
+    let targetAddressTransformed = targetAddress.replace(' ','+');
+    axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${targetAddressTransformed}&key=${GOOGLEMAPS_API_KEY}`)
       .then(res => {
-        if (res.data.role[0] === 'Prospective Homebuyer') {
-          this.setState({
-            centerLong: res.data.locationCoordinates[0],
-            centerLat: res.data.locationCoordinates[1],
-            targetAddress: res.data.targetAddress
+        this.setState({ 
+          targetAddress: targetAddress,
+          centerLong: res.data.results[0].geometry.location.lng,
+          centerLat: res.data.results[0].geometry.location.lat
+        }, () => {
+          axios.put(SERVER_URL + `/user/${this.props.user.id}`, { targetAddress: this.state.targetAddress, locationCoordinates: [this.state.centerLong, this.state.centerLat] })
+            .then(res => {
+              localStorage.setItem('loginToken', res.data.token);
+              this.props.updateUser();
+            })
+            .catch(err => {
+              console.log('PUT request failed:', err);
+            })
           })
-        }
-        else {
-          this.setState({
-            centerLong: res.data.locationCoordinates[0],
-            centerLat: res.data.locationCoordinates[1]
-          })
-        }
       })
   }
 
@@ -56,7 +54,7 @@ class MapWidget extends Component {
     return markers;
   }
 
-  togglePopup = (e) => {
+  togglePopup = e => {
     let currentMarkerPopup = e.target.parentNode.nextSibling;
     currentMarkerPopup.style.display === 'none' ? currentMarkerPopup.style.display = 'block' : currentMarkerPopup.style.display = 'none';
   }
@@ -64,7 +62,7 @@ class MapWidget extends Component {
   render() {
     return (
       <div>
-        <HomebuyerTargetLocation user={this.props.user} updateTargetLocation={this.getTargetLocation} />
+        <HomebuyerTargetLocation user={this.props.user} updateTargetLocation={this.updateTargetLocation} />
         <div className="row">
           <div className="col-12">
             <Map
