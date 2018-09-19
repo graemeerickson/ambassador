@@ -2,7 +2,7 @@ import React from 'react';
 import { Marker, Popup } from 'react-mapbox-gl';
 import mapMarkerIcon from '../marker-icon.svg';
 
-export default ({user, index, isOpen, togglePopup}) => {
+const AmbassadorMarker = ({user, index, isOpen, togglePopup}) => {
   return (
     <div>
       <Marker
@@ -23,4 +23,6 @@ export default ({user, index, isOpen, togglePopup}) => {
       </Popup> }
     </div>
   )
-}
+};
+
+export default AmbassadorMarker;
