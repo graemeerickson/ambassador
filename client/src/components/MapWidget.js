@@ -62,8 +62,17 @@ class MapWidget extends Component {
   }
 
   togglePopup = e => {
-    let currentMarkerPopup = e.target.parentNode.nextSibling;
-    currentMarkerPopup.style.display === 'none' ? currentMarkerPopup.style.display = 'block' : currentMarkerPopup.style.display = 'none';
+    if (e.target) {
+      let currentMarkerPopup = e.target.parentNode.nextSibling;
+      currentMarkerPopup.style.display === 'none' ? currentMarkerPopup.style.display = 'block' : currentMarkerPopup.style.display = 'none';
+    } else {
+      let markerPopups = document.getElementsByClassName('marker-popup');
+      for (let i = 0; i < markerPopups.length; i++) {
+        if (markerPopups[i].style.display === 'block') {
+          markerPopups[i].style.display = 'none';
+        }
+      }
+    }
   }
 
   render() {
@@ -79,7 +88,8 @@ class MapWidget extends Component {
                 width: "100%"
               }}
               center={[this.state.centerLong, this.state.centerLat]}
-              zoom={[14]} >
+              zoom={[14]}
+              onClick={this.togglePopup} >
               {this.state.markers}
             </Map>
           </div>
