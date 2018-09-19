@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Profile = ({ user }) => {
   if (user) {
@@ -46,7 +47,7 @@ const Profile = ({ user }) => {
     return(
       <div>
         <br/><br/>
-        <h5><a href="/login">Log in</a> or get started by signing up as a <a href="/ambassador-registration">Neighborhood Ambassador</a> or a <a href="/homebuyer-registration">Prospective Homebuyer</a>.</h5>
+        <h5><Link to="/login">Log in</Link> or get started by signing up as a <Link to="/ambassador-registration">Neighborhood Ambassador</Link> or a <Link to="/homebuyer-registration">Prospective Homebuyer</Link>.</h5>
       </div>
     );
   }
