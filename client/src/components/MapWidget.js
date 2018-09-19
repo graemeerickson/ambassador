@@ -17,7 +17,8 @@ class MapWidget extends Component {
       targetAddress: props.user.targetAddress,
       centerLong: props.user.locationCoordinates[0],
       centerLat: props.user.locationCoordinates[1],
-      isOpen: false
+      isOpen: false,
+      markers: []
     }
   }
 
@@ -47,11 +48,17 @@ class MapWidget extends Component {
       .then(res => {
         markers = res.data.map( (ambassador, index) => {
           return (
-            <AmbassadorMarker user={ambassador} index={index} isOpen={this.state.isOpen} togglePopup={this.togglePopup} />
+            <AmbassadorMarker user={ambassador} key={index} isOpen={this.state.isOpen} togglePopup={this.togglePopup} />
           )
         })
+        this.setState({
+          markers: markers
+        })
       })
-    return markers;
+  };
+
+  componentDidMount() {
+    this.getAmbassadorMarkers();  
   }
 
   togglePopup = e => {
@@ -66,14 +73,14 @@ class MapWidget extends Component {
         <div className="row">
           <div className="col-12">
             <Map
-              style={"mapbox://styles/mapbox/streets-v9"}
+              style={`mapbox://styles/mapbox/streets-v9`}
               containerStyle={{
                 height: "550px",
                 width: "100%"
               }}
               center={[this.state.centerLong, this.state.centerLat]}
               zoom={[14]} >
-              {this.getAmbassadorMarkers()}
+              {this.state.markers}
             </Map>
           </div>
         </div>
