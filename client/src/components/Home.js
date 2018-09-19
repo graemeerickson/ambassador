@@ -55,7 +55,7 @@ export default ({ user, updateUser }) => {
                   </tr>
                 </tbody>
               </table>
-              <Link to="/homebuyer-registration"><button className="btn btn-primary role-button float-right">Get started</button></Link>
+              <Link to="/homebuyer-registration"><button className="btn btn-primary role-button float-right">Sign up</button></Link>
             </div>
           </div>
         </div>
@@ -79,7 +79,7 @@ export default ({ user, updateUser }) => {
                   </tr>
                 </tbody>
               </table>
-              <Link to="/ambassador-registration"><button className="btn btn-primary role-button float-right">Get started</button></Link>
+              <Link to="/ambassador-registration"><button className="btn btn-primary role-button float-right">Sign up</button></Link>
             </div>
           </div>
         </div>
